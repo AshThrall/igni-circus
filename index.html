@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Igni Circus Idle V4</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>🔥 Igni Circus Idle V4 🔥</h1>
+  <p>Zones, pets, cartes, donjon Ferrox, Thaddeus et Sierra.</p>
+</header>
+
+<nav>
+  <button onclick="showTab('combat')">🔥 Combat</button>
+  <button onclick="showTab('zones')">🗺️ Zones</button>
+  <button onclick="showTab('dungeon')">🏰 Donjon Ferrox</button>
+  <button onclick="showTab('shop')">🏪 Boutique</button>
+  <button onclick="showTab('pets')">🐾 Pets</button>
+  <button onclick="showTab('cards')">🃏 Cartes</button>
+  <button onclick="showTab('achievements')">🏆 Succès</button>
+  <button onclick="showTab('prestige')">♻️ Renaissance</button>
+</nav>
+
+<main>
+
+<section id="combat" class="tab active">
+  <div class="arena">
+    <h2 id="zoneName">Plaine des Salamandres</h2>
+    <h3 id="enemyName">Petite salamandre</h3>
+
+    <div class="hpBar">
+      <div id="enemyHpBar"></div>
+    </div>
+
+    <p>PV : <span id="enemyHp">25</span> / <span id="enemyMaxHp">25</span></p>
+
+    <div class="enemyBox">
+      <div id="liamBubble" class="hidden">C'est grave</div>
+      <img src="salamandre.png" id="enemy" alt="Ennemi">
+    </div>
+
+    <div id="wizard" onclick="castIgniCircus()">
+      <div id="wizardBubble" class="hidden">Zinocircus</div>
+      <img src="wizard.png" id="wizardImg" alt="Zino">
+      <div id="fireCircle"></div>
+    </div>
+
+    <button class="bigButton" onclick="castIgniCircus()">🔥 Lancer Igni Circus</button>
+    <div id="floatingTexts"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Statistiques</h2>
+    <p>Niveau mage : <span id="mageLevel">1</span></p>
+    <p>XP : <span id="xp">0</span> / <span id="xpNeeded">75</span></p>
+    <p>Pièces de feu : <span id="gold">0</span></p>
+    <p>Âmes de Liam : <span id="liamSouls">0</span></p>
+    <p>Ennemis tués : <span id="kills">0</span></p>
+    <p>Liam vaincus : <span id="liamKills">0</span></p>
+    <p>Dégâts clic : <span id="clickDamage">1</span></p>
+    <p>Dégâts auto/sec : <span id="autoDamage">0</span></p>
+    <p>Bonus dégâts : <span id="damageBonus">0</span>%</p>
+    <p>Bonus or : <span id="goldBonus">0</span>%</p>
+    <p>Bonus XP : <span id="xpBonus">0</span>%</p>
+    <p>Cartes trouvées : <span id="cardsFound">0</span> / <span id="cardsTotal">0</span></p>
+  </div>
+
+  <div class="panel">
+    <h2>Améliorations rapides</h2>
+
+    <button onclick="buyUpgrade('flame')">
+      Flamme renforcée — <span id="flameCost">80</span> PO
+      <br><small>+1 dégât clic</small>
+    </button>
+
+    <button onclick="buyUpgrade('circle')">
+      Cercle élargi — <span id="circleCost">350</span> PO
+      <br><small>+5 dégâts clic</small>
+    </button>
+
+    <button onclick="buyUpgrade('inferno')">
+      Igni Circus Infernal — <span id="infernoCost">3500</span> PO
+      <br><small>+25% dégâts clic</small>
+    </button>
+
+    <button onclick="buyUpgrade('autoRune')">
+      Rune automatique — <span id="autoRuneCost">900</span> PO
+      <br><small>+5 dégâts/sec</small>
+    </button>
+
+    <button onclick="buyUpgrade('critRune')">
+      Rune critique — <span id="critRuneCost">2500</span> PO
+      <br><small>+2% critique</small>
+    </button>
+
+    <button onclick="buyUpgrade('liamHunter')">
+      Chasseur de Liam — <span id="liamHunterCost">5000</span> PO
+      <br><small>+10% dégâts contre Liam</small>
+    </button>
+  </div>
+</section>
+
+<section id="zones" class="tab">
+  <div class="panel full">
+    <h2>🗺️ Zones</h2>
+    <p>10 zones, de plus en plus violentes. Certaines demandent d’avoir vaincu assez de Liam.</p>
+    <div id="zoneList" class="zoneGrid"></div>
+  </div>
+</section>
+
+<section id="dungeon" class="tab">
+  <div class="arena">
+    <h2>🏰 Donjon Ferrox</h2>
+    <h3 id="dungeonEnemyName">Élève Ferrox de 1ère année</h3>
+
+    <div class="hpBar">
+      <div id="dungeonHpBar"></div>
+    </div>
+
+    <p>PV : <span id="dungeonHp">100</span> / <span id="dungeonMaxHp">100</span></p>
+
+    <div class="enemyBox">
+      <img src="ferrox_1.png" id="dungeonEnemy" alt="Ferrox">
+    </div>
+
+    <button class="bigButton" onclick="attackDungeon()">🔥 Massacrer le Ferrox</button>
+
+    <p>Kills Ferrox : <span id="ferroxKills">0</span></p>
+    <p>Palier actuel : <span id="ferroxTier">1ère année</span></p>
+  </div>
+
+  <div class="panel">
+    <h2>Progression du donjon</h2>
+    <p>100 kills : 2e année</p>
+    <p>200 kills : 3e année</p>
+    <p>300 kills : 4e année</p>
+    <p>400 kills : Préfet Ferrox</p>
+    <p>500 kills : Directeur Ferrox</p>
+    <p>1000 kills : Directeur absolu vaincu</p>
+  </div>
+
+  <div class="panel">
+    <h2>Récompenses Ferrox</h2>
+    <p>Le donjon donne beaucoup d’XP, peu d’or, et des cartes Ferrox exclusives.</p>
+    <p>Les boss Ferrox donnent parfois des Âmes de Liam bonus.</p>
+  </div>
+</section>
+
+<section id="shop" class="tab">
+  <div class="npcPanel">
+    <img src="thaddeus.png" class="npcImg" alt="Thaddeus">
+    <h2>Thaddeus le marchand</h2>
+    <p id="thaddeusQuote">J'ai qu'un oeil, mais le bon !</p>
+  </div>
+
+  <div class="shopGrid">
+    <button onclick="buyItem('stick')">Bâton calciné<br><small>+10 dégâts clic</small><br><b><span id="stickCost">500</span> PO</b></button>
+    <button onclick="buyItem('cape')">Cape des flammes<br><small>+30 dégâts clic</small><br><b><span id="capeCost">1800</span> PO</b></button>
+    <button onclick="buyItem('ring')">Anneau de braise<br><small>+10% dégâts</small><br><b><span id="ringCost">4000</span> PO</b></button>
+    <button onclick="buyItem('eye')">Œil de Thaddeus<br><small>+25% XP</small><br><b><span id="eyeCost">9000</span> PO</b></button>
+    <button onclick="buyItem('crown')">Couronne Zino<br><small>+50% dégâts</small><br><b><span id="crownCost">25000</span> PO</b></button>
+    <button onclick="buyItem('boots')">Bottes du Zinofarm<br><small>+25% or</small><br><b><span id="bootsCost">14000</span> PO</b></button>
+    <button onclick="buyItem('grimoire')">Grimoire Zinogrotte<br><small>+50% XP</small><br><b><span id="grimoireCost">32000</span> PO</b></button>
+    <button onclick="buyItem('mask')">Masque Zinotroll<br><small>+100 dégâts/sec</small><br><b><span id="maskCost">45000</span> PO</b></button>
+    <button onclick="buyItem('orb')">Orbe Zinocircus<br><small>+5% critique</small><br><b><span id="orbCost">60000</span> PO</b></button>
+    <button onclick="buyItem('contract')">Contrat de Thaddeus<br><small>+1% drop carte</small><br><b><span id="contractCost">100000</span> PO</b></button>
+  </div>
+</section>
+
+<section id="pets" class="tab">
+  <div class="panel full">
+    <h2>🐾 Familiers</h2>
+
+    <div class="petGrid">
+      <div class="petCard">
+        <img src="pet_chat.png">
+        <h3>Chat Zino</h3>
+        <p>+10 dégâts/sec</p>
+        <button onclick="buyPet('chat')">Acheter — <span id="chatCost">1200</span> PO</button>
+        <p>Niveau : <span id="chatLevel">0</span></p>
+      </div>
+
+      <div class="petCard">
+        <img src="pet_salamandre.png">
+        <h3>Salamandre apprivoisée</h3>
+        <p>+40 dégâts/sec</p>
+        <button onclick="buyPet('salamander')">Acheter — <span id="salamanderCost">5000</span> PO</button>
+        <p>Niveau : <span id="salamanderLevel">0</span></p>
+      </div>
+
+      <div class="petCard">
+        <img src="pet_dragon.png">
+        <h3>Dragon Zino</h3>
+        <p>+180 dégâts/sec</p>
+        <button onclick="buyPet('dragon')">Acheter — <span id="dragonCost">25000</span> PO</button>
+        <p>Niveau : <span id="dragonLevel">0</span></p>
+      </div>
+
+      <div class="petCard">
+        <img src="pet_zinotroll.png">
+        <h3>Zinotroll</h3>
+        <p>+600 dégâts/sec</p>
+        <button onclick="buyPet('zinotroll')">Acheter — <span id="zinotrollCost">120000</span> PO</button>
+        <p>Niveau : <span id="zinotrollLevel">0</span></p>
+      </div>
+
+      <div class="petCard">
+        <img src="pet_zinotracteur.png">
+        <h3>Zino Tracteur</h3>
+        <p>+1500 dégâts/sec et +10% or</p>
+        <button onclick="buyPet('zinotracteur')">Acheter — <span id="zinotracteurCost">350000</span> PO</button>
+        <p>Niveau : <span id="zinotracteurLevel">0</span></p>
+      </div>
+
+      <div class="petCard">
+        <img src="pet_zinooeuf.png">
+        <h3>Zino Œuf de Pâques</h3>
+        <p>+5% drop carte</p>
+        <button onclick="buyPet('zinooeuf')">Acheter — <span id="zinooeufCost">1000000</span> PO</button>
+        <p>Niveau : <span id="zinooeufLevel">0</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cards" class="tab">
+  <div class="panel full">
+    <h2>🃏 Cartes à collectionner</h2>
+    <p>Cartes Salamandres, Liam, Zino, Thaddeus, Sierra et Ferrox.</p>
+    <div id="cardList" class="cardGrid"></div>
+  </div>
+</section>
+
+<section id="achievements" class="tab">
+  <div class="panel full">
+    <h2>🏆 Succès</h2>
+    <div id="achievementList" class="achievementGrid"></div>
+  </div>
+</section>
+
+<section id="prestige" class="tab">
+  <div class="npcPanel">
+    <img src="sierra.png" class="npcImg" alt="Sierra">
+    <h2>Sierra</h2>
+    <p id="sierraQuote">La folie</p>
+  </div>
+
+  <div class="panel">
+    <h2>Renaissance</h2>
+    <p>Disponible au niveau 50.</p>
+    <p>Tu obtiens des <b>Âmes de Liam</b> selon ton niveau et tes Liam vaincus.</p>
+    <button class="bigButton" onclick="prestige()">♻️ Renaître</button>
+  </div>
+
+  <div class="shopGrid">
+    <button onclick="buyPrestige('damage')">Mémoire des Salamandres<br><small>+5% dégâts permanent</small><br><b>Coût : <span id="prestigeDamageCost">1</span> âme</b></button>
+    <button onclick="buyPrestige('xp')">Traumatisme de Liam<br><small>+5% XP permanent</small><br><b>Coût : <span id="prestigeXpCost">1</span> âme</b></button>
+    <button onclick="buyPrestige('gold')">Tolérance au Zinotroll<br><small>+5% or permanent</small><br><b>Coût : <span id="prestigeGoldCost">1</span> âme</b></button>
+    <button onclick="buyPrestige('base')">Igni Circus Avancé<br><small>+2 dégâts clic permanent</small><br><b>Coût : <span id="prestigeBaseCost">2</span> âmes</b></button>
+    <button onclick="buyPrestige('drop')">Main du Collectionneur<br><small>+0.5% drop carte permanent</small><br><b>Coût : <span id="prestigeDropCost">3</span> âmes</b></button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <button onclick="saveGame()">💾 Sauvegarder</button>
+  <button onclick="resetGame()">🗑️ Effacer sauvegarde</button>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
