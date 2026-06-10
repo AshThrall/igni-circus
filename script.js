@@ -2033,9 +2033,43 @@ function updateDisplay() {
     "cardsTotal"
   ).textContent =
     cardList.length;
+  const upgrades = getUpgradeCosts();
+  document.getElementById("flameCost").textContent = upgrades.flame;
+  document.getElementById("circleCost").textContent = upgrades.circle;
+  document.getElementById("infernoCost").textContent = upgrades.inferno;
+  document.getElementById("autoRuneCost").textContent = upgrades.autoRune;
+  document.getElementById("critRuneCost").textContent = upgrades.critRune;
+  document.getElementById("liamHunterCost").textContent = upgrades.liamHunter;
 
+  const items = getItemCosts();
+  document.getElementById("stickCost").textContent = items.stick;
+  document.getElementById("capeCost").textContent = items.cape;
+  document.getElementById("ringCost").textContent = items.ring;
+  document.getElementById("eyeCost").textContent = items.eye;
+  document.getElementById("crownCost").textContent = items.crown;
+  document.getElementById("bootsCost").textContent = items.boots;
+  document.getElementById("grimoireCost").textContent = items.grimoire;
+  document.getElementById("maskCost").textContent = items.mask;
+  document.getElementById("orbCost").textContent = items.orb;
+  document.getElementById("contractCost").textContent = items.contract;
+
+  const pets = getPetCosts();
+  document.getElementById("chatCost").textContent = pets.chat;
+  document.getElementById("salamanderCost").textContent = pets.salamander;
+  document.getElementById("dragonCost").textContent = pets.dragon;
+  document.getElementById("zinotrollCost").textContent = pets.zinotroll;
+  document.getElementById("zinotracteurCost").textContent = pets.zinotracteur;
+  document.getElementById("zinooeufCost").textContent = pets.zinooeuf;
+
+  document.getElementById("chatLevel").textContent = game.pets.chat;
+  document.getElementById("salamanderLevel").textContent = game.pets.salamander;
+  document.getElementById("dragonLevel").textContent = game.pets.dragon;
+  document.getElementById("zinotrollLevel").textContent = game.pets.zinotroll;
+  document.getElementById("zinotracteurLevel").textContent = game.pets.zinotracteur;
+  document.getElementById("zinooeufLevel").textContent = game.pets.zinooeuf;
   updateDungeonDisplay();
   renderAll();
+  
 }
 
 function saveGame() {
