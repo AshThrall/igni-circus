@@ -2023,6 +2023,21 @@ function updateDisplay() {
     "autoDamage"
   ).textContent =
     game.autoDamage;
+    document.getElementById(
+  "damageBonus"
+)
+.textContent =
+  getDamageBonus();
+
+document.getElementById(
+  "goldBonus"
+).textContent =
+  getGoldBonus();
+
+document.getElementById(
+  "xpBonus"
+).textContent =
+  getXpBonus();
 
   document.getElementById(
     "cardsFound"
