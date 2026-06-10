@@ -2107,3 +2107,93 @@ setInterval(
 );
 
 loadGame();
+// =========================
+// CLASSEMENT SUPABASE
+// =========================
+
+const SUPABASE_URL = "https://eehpnfsttpxyevthvblb.supabase.co";
+const SUPABASE_KEY = "sb_publishable_DGBMBcARMNbU0Fp2uZU39g__25YyhU0";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+let playerName = localStorage.getItem("igniPlayerName");
+
+if (!playerName) {
+  playerName = prompt("Choisis ton pseudo pour le classement :") || "Joueur";
+  localStorage.setItem("igniPlayerName", playerName);
+}
+
+async function uploadScore() {
+  const score = {
+    pseudo: playerName,
+    niveau: game.mageLevel,
+    liam: game.liamKills,
+    ferrox: game.ferroxKills,
+    carte: cardsFound(),
+    prestige: game.liamSouls,
+    updated_at: new Date().toISOString()
+  };
+
+  const { data: existing } = await supabaseClient
+    .from("leaderboard")
+    .select("id")
+    .eq("pseudo", playerName)
+    .limit(1);
+
+  if (existing && existing.length > 0) {
+    await supabaseClient
+      .from("leaderboard")
+      .update(score)
+      .eq("id", existing[0].id);
+  } else {
+    await supabaseClient
+      .from("leaderboard")
+      .insert(score);
+  }
+
+  alert("Score envoyé !");
+  loadLeaderboard();
+}
+
+async function loadLeaderboard() {
+  const { data, error } = await supabaseClient
+    .from("leaderboard")
+    .select("*")
+    .order("niveau", { ascending: false })
+    .limit(25);
+
+  const list = document.getElementById("leaderboardList");
+
+  if (error) {
+    list.innerHTML = "<p>Erreur de chargement du classement.</p>";
+    return;
+  }
+
+  list.innerHTML = "";
+
+  data.forEach((player, index) => {
+    const div = document.createElement("div");
+    div.className = "achievement unlocked";
+
+    div.innerHTML = `
+      <h3>#${index + 1} — ${player.pseudo}</h3>
+      <p>Niveau : ${player.niveau}</p>
+      <p>Liam vaincus : ${player.liam}</p>
+      <p>Ferrox vaincus : ${player.ferrox}</p>
+      <p>Cartes : ${player.carte}</p>
+      <p>Âmes de Liam : ${player.prestige}</p>
+    `;
+
+    list.appendChild(div);
+  });
+}
+
+const oldSaveGame = saveGame;
+
+saveGame = function() {
+  oldSaveGame();
+  uploadScore();
+};

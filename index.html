@@ -21,6 +21,7 @@
   <button onclick="showTab('cards')">🃏 Cartes</button>
   <button onclick="showTab('achievements')">🏆 Succès</button>
   <button onclick="showTab('prestige')">♻️ Renaissance</button>
+  <button onclick="showTab('leaderboard')">🌍 Classement</button>
 </nav>
 
 <main>
@@ -69,36 +70,12 @@
 
   <div class="panel">
     <h2>Améliorations rapides</h2>
-
-    <button onclick="buyUpgrade('flame')">
-      Flamme renforcée — <span id="flameCost">80</span> PO
-      <br><small>+1 dégât clic</small>
-    </button>
-
-    <button onclick="buyUpgrade('circle')">
-      Cercle élargi — <span id="circleCost">350</span> PO
-      <br><small>+5 dégâts clic</small>
-    </button>
-
-    <button onclick="buyUpgrade('inferno')">
-      Igni Circus Infernal — <span id="infernoCost">3500</span> PO
-      <br><small>+25% dégâts clic</small>
-    </button>
-
-    <button onclick="buyUpgrade('autoRune')">
-      Rune automatique — <span id="autoRuneCost">900</span> PO
-      <br><small>+5 dégâts/sec</small>
-    </button>
-
-    <button onclick="buyUpgrade('critRune')">
-      Rune critique — <span id="critRuneCost">2500</span> PO
-      <br><small>+2% critique</small>
-    </button>
-
-    <button onclick="buyUpgrade('liamHunter')">
-      Chasseur de Liam — <span id="liamHunterCost">5000</span> PO
-      <br><small>+10% dégâts contre Liam</small>
-    </button>
+    <button onclick="buyUpgrade('flame')">Flamme renforcée — <span id="flameCost">80</span> PO<br><small>+1 dégât clic</small></button>
+    <button onclick="buyUpgrade('circle')">Cercle élargi — <span id="circleCost">350</span> PO<br><small>+5 dégâts clic</small></button>
+    <button onclick="buyUpgrade('inferno')">Igni Circus Infernal — <span id="infernoCost">3500</span> PO<br><small>+25% dégâts clic</small></button>
+    <button onclick="buyUpgrade('autoRune')">Rune automatique — <span id="autoRuneCost">900</span> PO<br><small>+5 dégâts/sec</small></button>
+    <button onclick="buyUpgrade('critRune')">Rune critique — <span id="critRuneCost">2500</span> PO<br><small>+2% critique</small></button>
+    <button onclick="buyUpgrade('liamHunter')">Chasseur de Liam — <span id="liamHunterCost">5000</span> PO<br><small>+10% dégâts contre Liam</small></button>
   </div>
 </section>
 
@@ -174,53 +151,12 @@
     <h2>🐾 Familiers</h2>
 
     <div class="petGrid">
-      <div class="petCard">
-        <img src="pet_chat.png">
-        <h3>Chat Zino</h3>
-        <p>+10 dégâts/sec</p>
-        <button onclick="buyPet('chat')">Acheter — <span id="chatCost">1200</span> PO</button>
-        <p>Niveau : <span id="chatLevel">0</span></p>
-      </div>
-
-      <div class="petCard">
-        <img src="pet_salamandre.png">
-        <h3>Salamandre apprivoisée</h3>
-        <p>+40 dégâts/sec</p>
-        <button onclick="buyPet('salamander')">Acheter — <span id="salamanderCost">5000</span> PO</button>
-        <p>Niveau : <span id="salamanderLevel">0</span></p>
-      </div>
-
-      <div class="petCard">
-        <img src="pet_dragon.png">
-        <h3>Dragon Zino</h3>
-        <p>+180 dégâts/sec</p>
-        <button onclick="buyPet('dragon')">Acheter — <span id="dragonCost">25000</span> PO</button>
-        <p>Niveau : <span id="dragonLevel">0</span></p>
-      </div>
-
-      <div class="petCard">
-        <img src="pet_zinotroll.png">
-        <h3>Zinotroll</h3>
-        <p>+600 dégâts/sec</p>
-        <button onclick="buyPet('zinotroll')">Acheter — <span id="zinotrollCost">120000</span> PO</button>
-        <p>Niveau : <span id="zinotrollLevel">0</span></p>
-      </div>
-
-      <div class="petCard">
-        <img src="pet_zinotracteur.png">
-        <h3>Zino Tracteur</h3>
-        <p>+1500 dégâts/sec et +10% or</p>
-        <button onclick="buyPet('zinotracteur')">Acheter — <span id="zinotracteurCost">350000</span> PO</button>
-        <p>Niveau : <span id="zinotracteurLevel">0</span></p>
-      </div>
-
-      <div class="petCard">
-        <img src="pet_zinooeuf.png">
-        <h3>Zino Œuf de Pâques</h3>
-        <p>+5% drop carte</p>
-        <button onclick="buyPet('zinooeuf')">Acheter — <span id="zinooeufCost">1000000</span> PO</button>
-        <p>Niveau : <span id="zinooeufLevel">0</span></p>
-      </div>
+      <div class="petCard"><img src="pet_chat.png"><h3>Chat Zino</h3><p>+10 dégâts/sec</p><button onclick="buyPet('chat')">Acheter — <span id="chatCost">1200</span> PO</button><p>Niveau : <span id="chatLevel">0</span></p></div>
+      <div class="petCard"><img src="pet_salamandre.png"><h3>Salamandre apprivoisée</h3><p>+40 dégâts/sec</p><button onclick="buyPet('salamander')">Acheter — <span id="salamanderCost">5000</span> PO</button><p>Niveau : <span id="salamanderLevel">0</span></p></div>
+      <div class="petCard"><img src="pet_dragon.png"><h3>Dragon Zino</h3><p>+180 dégâts/sec</p><button onclick="buyPet('dragon')">Acheter — <span id="dragonCost">25000</span> PO</button><p>Niveau : <span id="dragonLevel">0</span></p></div>
+      <div class="petCard"><img src="pet_zinotroll.png"><h3>Zinotroll</h3><p>+600 dégâts/sec</p><button onclick="buyPet('zinotroll')">Acheter — <span id="zinotrollCost">120000</span> PO</button><p>Niveau : <span id="zinotrollLevel">0</span></p></div>
+      <div class="petCard"><img src="pet_zinotracteur.png"><h3>Zino Tracteur</h3><p>+1500 dégâts/sec et +10% or</p><button onclick="buyPet('zinotracteur')">Acheter — <span id="zinotracteurCost">350000</span> PO</button><p>Niveau : <span id="zinotracteurLevel">0</span></p></div>
+      <div class="petCard"><img src="pet_zinooeuf.png"><h3>Zino Œuf de Pâques</h3><p>+5% drop carte</p><button onclick="buyPet('zinooeuf')">Acheter — <span id="zinooeufCost">1000000</span> PO</button><p>Niveau : <span id="zinooeufLevel">0</span></p></div>
     </div>
   </div>
 </section>
@@ -263,6 +199,16 @@
   </div>
 </section>
 
+<section id="leaderboard" class="tab">
+  <div class="panel full">
+    <h2>🌍 Classement mondial</h2>
+    <p>Envoie ton score et compare-toi aux autres joueurs.</p>
+    <button onclick="uploadScore()">Envoyer mon score</button>
+    <button onclick="loadLeaderboard()">Actualiser</button>
+    <div id="leaderboardList" class="achievementGrid"></div>
+  </div>
+</section>
+
 </main>
 
 <footer>
@@ -270,6 +216,7 @@
   <button onclick="resetGame()">🗑️ Effacer sauvegarde</button>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
 </body>
 </html>
