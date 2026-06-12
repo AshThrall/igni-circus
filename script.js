@@ -764,7 +764,10 @@ function createFloatText(text) {
     "floatText";
 
   div.textContent =
-    text;
+  text.replace(
+    /(\d+)/g,
+    (n) => formatNumber(Number(n))
+  );
 
   container.appendChild(div);
 
@@ -1955,17 +1958,19 @@ function updateDisplay() {
   ).style.width =
     hpPercent + "%";
 
-  document.getElementById(
-    "enemyHp"
-  ).textContent =
-    Math.floor(
-      game.enemyHp
-    );
+ document.getElementById(
+  "enemyHp"
+).textContent =
+  formatNumber(
+    game.enemyHp
+  );
 
   document.getElementById(
-    "enemyMaxHp"
-  ).textContent =
-    game.enemyMaxHp;
+  "enemyMaxHp"
+).textContent =
+  formatNumber(
+    game.enemyMaxHp
+  );
 
   document.getElementById(
     "enemyName"
@@ -1997,7 +2002,7 @@ function updateDisplay() {
   document.getElementById(
     "gold"
   ).textContent =
-    game.gold;
+   formatNumber(game.gold);
 
   document.getElementById(
     "kills"
@@ -2014,15 +2019,19 @@ function updateDisplay() {
   ).textContent =
     game.liamSouls;
 
-  document.getElementById(
-    "clickDamage"
-  ).textContent =
-    getClickDamage();
+ document.getElementById(
+  "clickDamage"
+).textContent =
+  formatNumber(
+    getClickDamage()
+  );
 
-  document.getElementById(
-    "autoDamage"
-  ).textContent =
-    game.autoDamage;
+document.getElementById(
+  "autoDamage"
+).textContent =
+  formatNumber(
+    game.autoDamage
+  );
     document.getElementById(
   "damageBonus"
 )
@@ -2246,3 +2255,22 @@ saveGame = function() {
   oldSaveGame();
   uploadScore();
 };
+function formatNumber(num) {
+
+  if (num >= 1e15)
+    return (num / 1e15).toFixed(1) + "Qa";
+
+  if (num >= 1e12)
+    return (num / 1e12).toFixed(1) + "T";
+
+  if (num >= 1e9)
+    return (num / 1e9).toFixed(1) + "B";
+
+  if (num >= 1e6)
+    return (num / 1e6).toFixed(1) + "M";
+
+  if (num >= 1e3)
+    return (num / 1e3).toFixed(1) + "K";
+
+  return Math.floor(num);
+}
